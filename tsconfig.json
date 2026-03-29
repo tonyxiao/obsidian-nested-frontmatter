@@ -12,5 +12,5 @@
     "skipLibCheck": true,
     "types": ["node", "vitest/globals"]
   },
-  "include": ["main.js", "tests/**/*.mjs"]
+  "include": ["main.js"]
 }
