@@ -1,0 +1,47 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm check
+      - run: pnpm test
+      - run: pnpm build
+
+      - name: Package release assets
+        run: |
+          mkdir dist
+          cp manifest.json main.js versions.json dist/
+          cd dist
+          zip -r obsidian-nested-frontmatter-${GITHUB_REF_NAME}.zip manifest.json main.js versions.json
+
+      - name: Publish GitHub release
+        uses: softprops/action-gh-release@v2
+        if: startsWith(github.ref, 'refs/tags/')
+        with:
+          files: |
+            dist/manifest.json
+            dist/main.js
+            dist/versions.json
+            dist/obsidian-nested-frontmatter-${{ github.ref_name }}.zip
