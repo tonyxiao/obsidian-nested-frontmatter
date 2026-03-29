@@ -1,0 +1,31 @@
+{
+  "name": "obsidian-nested-frontmatter",
+  "version": "0.1.0",
+  "description": "Render nested frontmatter objects and arrays inside Obsidian's native Properties pane.",
+  "license": "MIT",
+  "type": "module",
+  "main": "main.js",
+  "scripts": {
+    "build": "node esbuild.config.mjs production",
+    "dev": "node esbuild.config.mjs",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "check": "tsc --noEmit"
+  },
+  "keywords": [
+    "obsidian",
+    "obsidian-plugin",
+    "frontmatter",
+    "metadata"
+  ],
+  "devDependencies": {
+    "@types/node": "^24.6.0",
+    "esbuild": "^0.25.10",
+    "obsidian": "^1.8.10",
+    "tslib": "^2.8.1",
+    "typescript": "^5.9.3",
+    "vitest": "^3.2.4",
+    "jsdom": "^26.1.0",
+    "@types/jsdom": "^21.1.7"
+  }
+}

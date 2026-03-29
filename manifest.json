@@ -1,0 +1,10 @@
+{
+  "id": "obsidian-nested-frontmatter",
+  "name": "Obsidian Nested Frontmatter",
+  "version": "0.1.0",
+  "minAppVersion": "1.6.0",
+  "description": "Render nested frontmatter objects and arrays inside Obsidian's native Properties pane.",
+  "author": "Tony Xiao",
+  "authorUrl": "https://github.com/tonyxiao",
+  "isDesktopOnly": false
+}
