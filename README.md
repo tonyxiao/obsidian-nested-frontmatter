@@ -19,16 +19,18 @@ Current scope:
 
 ## Development
 
+There is no bundling step. `main.js` is the source file Obsidian loads.
+
 ```bash
 pnpm install
-pnpm build
+pnpm check
 pnpm test
 ```
 
 ## GitHub Actions
 
-- `CI` runs typechecking, tests, and a production build on every push and pull request.
-- `Release` runs the same verification, packages the plugin assets, and publishes a GitHub release when you push a `v*` tag such as `v0.1.0`.
+- `CI` runs typechecking and tests on every push and pull request.
+- `Release` runs the same verification, packages `main.js`, `manifest.json`, and `versions.json`, and publishes a GitHub release when you push a `v*` tag such as `v0.1.0`.
 
 ## Testing
 

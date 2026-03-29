@@ -1,8 +1,21 @@
+import { createRequire } from 'node:module';
 import { JSDOM } from 'jsdom';
 import { describe, expect, it, vi } from 'vitest';
-import { enhanceMetadataProperty, refreshStructuredMetadata, STRUCTURED_PROPERTY_CLASS, STRUCTURED_VALUE_CLASS } from '../src/metadataEnhancer';
 
-function createPropertyDom(valueText: string): HTMLElement {
+const require = createRequire(import.meta.url);
+const { __test__ } = require('../main.js');
+const {
+  enhanceMetadataProperty,
+  refreshStructuredMetadata,
+  STRUCTURED_PROPERTY_CLASS,
+  STRUCTURED_VALUE_CLASS,
+} = __test__;
+
+/**
+ * @param {string} valueText
+ * @returns {HTMLElement}
+ */
+function createPropertyDom(valueText) {
   const dom = new JSDOM(`
     <div class="metadata-property" data-property-key="reservation_segments">
       <div class="metadata-property-value" data-property-type="unknown">
@@ -10,7 +23,7 @@ function createPropertyDom(valueText: string): HTMLElement {
       </div>
     </div>
   `);
-  return dom.window.document.querySelector('.metadata-property') as HTMLElement;
+  return /** @type {HTMLElement} */ (dom.window.document.querySelector('.metadata-property'));
 }
 
 describe('metadata enhancer', () => {
@@ -21,7 +34,7 @@ describe('metadata enhancer', () => {
     const enhanced = enhanceMetadataProperty(propertyEl, { openLink });
 
     expect(enhanced).toBe(true);
-    const value = propertyEl.querySelector('.metadata-property-value') as HTMLElement;
+    const value = /** @type {HTMLElement} */ (propertyEl.querySelector('.metadata-property-value'));
     expect(value.classList.contains(STRUCTURED_PROPERTY_CLASS)).toBe(true);
     expect(value.querySelector('.metadata-property-value-item')?.getAttribute('style')).toContain('display: none');
     expect(value.querySelector(`.${STRUCTURED_VALUE_CLASS}`)?.textContent).toContain('room-a');
@@ -33,8 +46,10 @@ describe('metadata enhancer', () => {
     const openLink = vi.fn();
 
     enhanceMetadataProperty(propertyEl, { openLink });
-    const link = propertyEl.querySelector('.onf-native-link') as HTMLElement;
-    link.dispatchEvent(new propertyEl.ownerDocument.defaultView!.MouseEvent('click', { bubbles: true }));
+    const link = /** @type {HTMLElement} */ (propertyEl.querySelector('.onf-native-link'));
+    const view = propertyEl.ownerDocument.defaultView;
+    if (!view) throw new Error('Expected a DOM window');
+    link.dispatchEvent(new view.MouseEvent('click', { bubbles: true }));
 
     expect(openLink).toHaveBeenCalledWith('room-a');
   });

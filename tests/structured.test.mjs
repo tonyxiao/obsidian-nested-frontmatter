@@ -1,5 +1,9 @@
+import { createRequire } from 'node:module';
 import { describe, expect, it } from 'vitest';
-import { classifyStructuredValue, parseWikilink, tryParseStructuredValue } from '../src/structured';
+
+const require = createRequire(import.meta.url);
+const { __test__ } = require('../main.js');
+const { classifyStructuredValue, parseWikilink, tryParseStructuredValue } = __test__;
 
 describe('structured parsing', () => {
   it('parses nested arrays and objects', () => {
