@@ -1,10 +1,10 @@
-# Obsidian Nested Frontmatter
+# Nested Frontmatter
 
-Render nested frontmatter arrays and objects inside Obsidian's native Properties pane.
+Render nested frontmatter arrays and objects inside the native Properties pane.
 
 ## What it does
 
-Obsidian shows scalar frontmatter values well, but nested objects and arrays often collapse into hard-to-read JSON-like blobs inside Properties. Obsidian Nested Frontmatter makes those values readable by rendering them as structured rows while keeping the native Properties UI.
+Scalar frontmatter values already read well, but nested objects and arrays often collapse into hard-to-read JSON-like blobs inside Properties. Nested Frontmatter makes those values readable by rendering them as structured rows while keeping the native Properties UI.
 
 Current scope:
 - Enhances nested object/array values that Obsidian renders as `unknown` properties

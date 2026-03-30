@@ -327,7 +327,7 @@ const styles = `
   }
 `;
 
-class ObsidianNestedFrontmatterPlugin extends Plugin {
+class NestedFrontmatterPlugin extends Plugin {
   async onload() {
     for (const widgetName of STRUCTURED_WIDGET_NAMES) {
       this.registerPatch(widgetName);
@@ -391,7 +391,7 @@ class ObsidianNestedFrontmatterPlugin extends Plugin {
 
   registerStyles() {
     const styleEl = document.createElement('style');
-    styleEl.setAttribute('data-obsidian-nested-frontmatter', 'true');
+    styleEl.setAttribute('data-nested-frontmatter', 'true');
     styleEl.textContent = styles;
     document.head.append(styleEl);
     this.register(() => styleEl.remove());
@@ -399,7 +399,7 @@ class ObsidianNestedFrontmatterPlugin extends Plugin {
 }
 
 module.exports = {
-  default: ObsidianNestedFrontmatterPlugin,
+  default: NestedFrontmatterPlugin,
   __test__: {
     STRUCTURED_PROPERTY_CLASS,
     STRUCTURED_VALUE_CLASS,

@@ -3,7 +3,7 @@ name: Release
 on:
   push:
     tags:
-      - 'v*'
+      - '*'
   workflow_dispatch:
 
 permissions:
@@ -33,7 +33,7 @@ jobs:
           mkdir dist
           cp manifest.json main.js versions.json dist/
           cd dist
-          zip -r obsidian-nested-frontmatter-${GITHUB_REF_NAME}.zip manifest.json main.js versions.json
+          zip -r nested-frontmatter-${GITHUB_REF_NAME}.zip manifest.json main.js versions.json
 
       - name: Publish GitHub release
         uses: softprops/action-gh-release@v2
@@ -43,4 +43,4 @@ jobs:
             dist/manifest.json
             dist/main.js
             dist/versions.json
-            dist/obsidian-nested-frontmatter-${{ github.ref_name }}.zip
+            dist/nested-frontmatter-${{ github.ref_name }}.zip
